@@ -3,7 +3,7 @@
         "name": "main",
         "environment": {
             "type": "noflo-browser",
-            "content": "<button id='button'>Go!</button>\n<p id='message'></p>"
+            "content": "<p id=\"output\">1323</p>\n<button id=\"button\">ABC</button>"
         },
         "icon": ""
     },
@@ -11,62 +11,72 @@
     "outports": {},
     "groups": [],
     "processes": {
-        "dom/GetElement_7amk2": {
+        "dom/GetElement_gzex1": {
             "component": "dom/GetElement",
             "metadata": {
                 "label": "dom/GetElement",
-                "x": 252,
-                "y": 180,
+                "x": -72,
+                "y": -72,
                 "width": 72,
                 "height": 72
             }
         },
-        "core/Output_cg49": {
-            "component": "core/Output",
-            "metadata": {
-                "label": "core/Output",
-                "x": 432,
-                "y": 360,
-                "width": 72,
-                "height": 72
-            }
-        },
-        "dom/WriteHtml_fpz6j": {
+        "dom/WriteHtml_syarv": {
             "component": "dom/WriteHtml",
             "metadata": {
                 "label": "dom/WriteHtml",
-                "x": 684,
-                "y": 288,
+                "x": 36,
+                "y": -108,
                 "width": 72,
                 "height": 72
             }
         },
-        "dom/GetElement_xvz54": {
+        "core/Output_e3y6o": {
+            "component": "core/Output",
+            "metadata": {
+                "label": "core/Output",
+                "x": 252,
+                "y": 36,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "dom/GetElement_lkms0": {
             "component": "dom/GetElement",
             "metadata": {
                 "label": "dom/GetElement",
-                "x": 252,
-                "y": 288,
+                "x": 36,
+                "y": -180,
                 "width": 72,
                 "height": 72
             }
         },
-        "interaction/ListenMouse_1l373": {
+        "dom/Listen_jq9kv": {
+            "component": "dom/Listen",
+            "metadata": {
+                "label": "dom/Listen",
+                "x": -108,
+                "y": 72,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "interaction/ListenMouse_89z6m": {
             "component": "interaction/ListenMouse",
             "metadata": {
                 "label": "interaction/ListenMouse",
-                "x": 432,
-                "y": 180,
+                "x": 288,
+                "y": -180,
                 "width": 72,
                 "height": 72
             }
         },
-        "core/Kick_ey1nh": {
+        "core/Kick_vu04v": {
             "component": "core/Kick",
             "metadata": {
                 "label": "core/Kick",
-                "x": 576,
-                "y": 180,
+                "x": -72,
+                "y": -252,
                 "width": 72,
                 "height": 72
             }
@@ -75,23 +85,25 @@
     "connections": [
         {
             "src": {
-                "process": "dom/GetElement_xvz54",
-                "port": "element"
+                "process": "dom/GetElement_gzex1",
+                "port": "error"
             },
             "tgt": {
-                "process": "dom/WriteHtml_fpz6j",
-                "port": "container"
+                "process": "core/Output_e3y6o",
+                "port": "in"
             },
-            "metadata": {}
+            "metadata": {
+                "route": 1
+            }
         },
         {
             "src": {
-                "process": "dom/GetElement_7amk2",
+                "process": "dom/GetElement_gzex1",
                 "port": "element"
             },
             "tgt": {
-                "process": "interaction/ListenMouse_1l373",
-                "port": "element"
+                "process": "dom/WriteHtml_syarv",
+                "port": "container"
             },
             "metadata": {
                 "route": 0
@@ -99,70 +111,85 @@
         },
         {
             "src": {
-                "process": "dom/GetElement_7amk2",
-                "port": "error"
+                "process": "dom/WriteHtml_syarv",
+                "port": "container"
             },
             "tgt": {
-                "process": "core/Output_cg49",
+                "process": "core/Output_e3y6o",
                 "port": "in"
             },
             "metadata": {
-                "route": 1
+                "route": 5
             }
         },
         {
             "src": {
-                "process": "dom/GetElement_xvz54",
-                "port": "error"
+                "process": "dom/GetElement_lkms0",
+                "port": "element"
             },
             "tgt": {
-                "process": "core/Output_cg49",
-                "port": "in"
+                "process": "interaction/ListenMouse_89z6m",
+                "port": "element"
             },
             "metadata": {
-                "route": 1
+                "route": 5
             }
         },
         {
             "src": {
-                "process": "interaction/ListenMouse_1l373",
+                "process": "dom/GetElement_lkms0",
+                "port": "error"
+            },
+            "tgt": {
+                "process": "core/Output_e3y6o",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 5
+            }
+        },
+        {
+            "src": {
+                "process": "interaction/ListenMouse_89z6m",
                 "port": "click"
             },
             "tgt": {
-                "process": "core/Kick_ey1nh",
+                "process": "core/Kick_vu04v",
                 "port": "in"
             },
-            "metadata": {}
+            "metadata": {
+                "route": 7
+            }
         },
         {
             "src": {
-                "process": "core/Kick_ey1nh",
+                "process": "core/Kick_vu04v",
                 "port": "out"
             },
             "tgt": {
-                "process": "dom/WriteHtml_fpz6j",
+                "process": "dom/WriteHtml_syarv",
                 "port": "html"
             },
             "metadata": {}
         },
         {
-            "data": "#button",
+            "data": "button",
             "tgt": {
-                "process": "dom/GetElement_7amk2",
+                "process": "dom/GetElement_lkms0",
                 "port": "selector"
             }
         },
         {
-            "data": "#message",
+            "data": "#output",
             "tgt": {
-                "process": "dom/GetElement_xvz54",
+                "process": "dom/GetElement_gzex1",
                 "port": "selector"
             }
         },
         {
-            "data": "Hello World!",
+            "data": "rrrr",
             "tgt": {
-                "process": "core/Kick_ey1nh",
+                "process": "core/Kick_vu04v",
                 "port": "data"
             }
         }
